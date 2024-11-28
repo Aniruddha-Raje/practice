@@ -1,41 +1,36 @@
 package com.study.practice.leetcode;
 
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Stack;
 
-@Log4j2
+@Slf4j
 public class ValidParentheses {
+    public static void main(String[] args) {
+        String input = "({[]})";
 
-    // push opening brackets
-    // pop when closing bracket is found
-    // check popped closing brackets
-//    private static final System.Logger logger = System.getLogger(ValidParentheses.class.getName());
+        boolean isValid = isValidParentheses(input);
 
-    public static boolean isValid(String s) {
+        log.info("Is the input valid? " + isValid);
+    }
+
+    public static boolean isValidParentheses(String s) {
         Stack<Character> stack = new Stack<>();
 
         for (char c : s.toCharArray()) {
             if (c == '(' || c == '{' || c == '[') {
                 stack.push(c);
+            } else if (c == ')' && !stack.isEmpty() && stack.peek() == '(') {
+                stack.pop();
+            } else if (c == '}' && !stack.isEmpty() && stack.peek() == '{') {
+                stack.pop();
+            } else if (c == ']' && !stack.isEmpty() && stack.peek() == '[') {
+                stack.pop();
             } else {
-                if (stack.isEmpty()) return false;
-
-                char top = stack.peek();
-
-                if ((c == ')' && top == '(') || (c == '}' && top == '{') || (c == ']' && top == '[')) {
-                    stack.pop();
-                } else {
-                    return false;
-                }
+                return false;
             }
         }
-        return stack.isEmpty();
-    }
 
-    public static void main(String[] args) {
-        String input = "{[]}()";
-        log.debug("hello");
-//        logger.log(System.Logger.Level.DEBUG, "The input string \"" + input + "\" is " + (isValid(input) ? "valid" : "not valid"));
+        return stack.isEmpty();
     }
 }
