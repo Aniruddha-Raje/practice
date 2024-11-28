@@ -1,0 +1,23 @@
+# PostgreSQL Database Configuration
+spring:
+  application:
+    name: practice
+
+# Management Endpoints
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,info,mappings
+
+# Logging Configuration
+logging:
+  level:
+    org:
+      springframework:
+        web: info
+
+app:
+  jsonPlaceholderUrl: https://jsonplaceholder.typicode.com/posts
+  baseUrl: http://localhost:9000
+  path: /customer/all
