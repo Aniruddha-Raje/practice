@@ -2,8 +2,6 @@ package com.study.practice.leetcode;
 
 public class FindPeak {
 
-    private static final System.Logger logger = System.getLogger(FindPeak.class.getName());
-
     public static int findPeakElement(int[] nums) {
         if (nums == null || nums.length == 0) {
             return -1;

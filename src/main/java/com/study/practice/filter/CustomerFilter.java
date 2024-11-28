@@ -19,13 +19,13 @@ public class CustomerFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         log.info("doFilter called");
-        log.info("doFilter start {}" + req.getRequestURI());
+        log.info("doFilter before {}" + req.getRequestURI());
 
         filterChain.doFilter(servletRequest, servletResponse);
-        log.info("doFilter committing transaction {}" + req.getRequestURI());
+        log.info("doFilter after {}" + req.getRequestURI());
     }
 
     @Override public void destroy() {
-        log.info("Filter destroy called");
+        log.info("Filter destroy");
     }
 }

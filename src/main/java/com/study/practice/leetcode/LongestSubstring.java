@@ -1,42 +1,42 @@
 package com.study.practice.leetcode;
 
-import java.util.HashMap;
-import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
+@Slf4j
 public class LongestSubstring {
 
-    private static final System.Logger logger = System.getLogger(LongestSubstring.class.getName());
-
-    public static String lengthOfLongestSubstring(String s) {
+    public void longestSubstring(String s) {
         if (s == null || s.isEmpty()) {
-            return "";
+            log.info("String is empty");
         }
 
-        Map<Character, Integer> map = new HashMap<>();
-        int maxLength = 0;
-        String longestSubstring = "";
-        int start = 0;
+        Map<Integer, String> map = new TreeMap<>(Collections.reverseOrder());
+        Set<String> set = new HashSet<>();
+        char[] charArr = s.toCharArray();
 
-        for (int end = 0; end < s.length(); end++) {
-            char currentChar = s.charAt(end);
-
-            if (map.containsKey(currentChar)) {
-                start = Math.max(map.get(currentChar) + 1, start);
+        for(char ch: charArr){
+            if(set.contains(String.valueOf(ch))){
+                String temp = set.stream().collect(Collectors.joining());
+                map.put(set.size(), temp);
+                set = new HashSet<>();
             }
-
-            if (end - start + 1 > maxLength) {
-                maxLength = end - start + 1;
-                longestSubstring = s.substring(start, end + 1);
+            else{
+                set.add(String.valueOf(ch));
             }
-
-            map.put(currentChar, end);
         }
-        return longestSubstring;
+
+        Map.Entry<Integer, String> firstEntry = map.entrySet().iterator().next();
+
+        log.info("Longest substring: " + firstEntry.getKey() + " | Length : " + firstEntry.getValue());
     }
 
     public static void main(String[] args) {
+        LongestSubstring obj = new LongestSubstring();
         String input = "abcabcdbb";
-        System.out.println("The length of the longest substring without repeating characters is: " +
-                lengthOfLongestSubstring(input));
+
+        obj.longestSubstring(input);
     }
 }

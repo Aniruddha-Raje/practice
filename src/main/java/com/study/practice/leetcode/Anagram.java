@@ -1,7 +1,10 @@
 package com.study.practice.leetcode;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.Arrays;
 
+@Slf4j
 public class Anagram {
 
     public static void main(String[] args) {
@@ -14,6 +17,6 @@ public class Anagram {
         Arrays.sort(arr1);
         Arrays.sort(arr2);
 
-        boolean areAnagram = Arrays.equals(arr1, arr2);
+        log.info("are Strings anagram: " +  Arrays.equals(arr1, arr2));
     }
 }
