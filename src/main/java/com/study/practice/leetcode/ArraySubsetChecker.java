@@ -1,6 +1,8 @@
 package com.study.practice.leetcode;
 
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,6 +11,10 @@ public class ArraySubsetChecker {
     public static void main(String[] args) {
         int[] array1 = {1, 2, 3};
         int[] array2 = {1, 2, 3, 4, 5};
+
+        String str1 = Arrays.toString(array1);
+        String str2 = Arrays.toString(array2);
+        log.info("Is substring " + str2.contains(str1));
 
         boolean isSubset = isArraySubset(array1, array2);
         log.info("Is array1 a subset of array2? " + isSubset);

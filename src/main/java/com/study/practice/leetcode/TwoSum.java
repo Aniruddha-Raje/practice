@@ -1,11 +1,12 @@
 package com.study.practice.leetcode;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 public class TwoSum {
-
-    private static final System.Logger logger = System.getLogger(TwoSum.class.getName());
 
 //    For every element in the array -
 //    If the element exists in the Map,
@@ -34,7 +35,6 @@ public class TwoSum {
 
         int[] indices = findTwoSum(nums, target);
 
-        System.out.println("Indices of the two numbers that add up to " + target + " are: " +
-                indices[0] + " and " + indices[1]);
+        log.info("numbers that add up to " + target + " are: " + indices[0] + " and " + indices[1]);
     }
 }

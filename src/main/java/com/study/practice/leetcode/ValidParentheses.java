@@ -7,18 +7,16 @@ import java.util.Stack;
 @Slf4j
 public class ValidParentheses {
     public static void main(String[] args) {
-        String input = "({[]})";
 
-        boolean isValid = isValidParentheses(input);
-
-        log.info("Is the input valid? " + isValid);
-    }
-
-    public static boolean isValidParentheses(String s) {
+        boolean isValid = true;
         Stack<Character> stack = new Stack<>();
 
-        for (char c : s.toCharArray()) {
+        String input = "({[{}]})";
+
+        for (char c : input.toCharArray()) {
+
             if (c == '(' || c == '{' || c == '[') {
+                //push opening parenthesis into the stack.
                 stack.push(c);
             } else if (c == ')' && !stack.isEmpty() && stack.peek() == '(') {
                 stack.pop();
@@ -27,10 +25,10 @@ public class ValidParentheses {
             } else if (c == ']' && !stack.isEmpty() && stack.peek() == '[') {
                 stack.pop();
             } else {
-                return false;
+                isValid = false;
             }
         }
 
-        return stack.isEmpty();
+        log.info("Input has valid parentheses " + (stack.isEmpty() && isValid));
     }
 }
