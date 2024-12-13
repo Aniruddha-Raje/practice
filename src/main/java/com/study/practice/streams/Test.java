@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 public class Test {
     public static void main(String[] args) {
 
+        int[] intArr = {1, 2, 3, 4, 5};
         List<Integer> numbers = Arrays.asList(1,3,5,2,7,6,10,8,9,4);
         List<String> strings = List.of("Hello", "World", "Learn", "Java");
         String str = "Aniruddha Raje";
@@ -33,17 +34,37 @@ public class Test {
 
         log.info(numbers.toString() + strings + str + listOfLists +  list);
 
+
+        list.stream().sorted(Comparator.comparingInt(City::population).reversed()).skip(1).findFirst();
+        numbers.stream().mapToInt(Integer::intValue).max();
         numbers.stream().reduce(0, Integer::sum);
+        strings.stream().collect(Collectors.joining());
+        strings.stream().map(String::toUpperCase);
+        numbers.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+
+
+
+
+
+
+
+
+
+
+        Arrays.stream(intArr).average();
+        Arrays.stream(intArr).max();
         numbers.stream().mapToInt(Integer::intValue).average();
         numbers.stream().max(Integer::compareTo);
-        numbers.stream().skip(numbers.size()-2).findFirst();
-        numbers.stream().sorted(Comparator.comparingInt(Integer::intValue).reversed()).findFirst();
+        numbers.stream().sorted(Comparator.comparingInt(Integer::intValue).reversed()).toList();
         numbers.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-        numbers.stream().anyMatch(n -> n ==10);
+        numbers.stream().reduce(0, Integer::sum);
 
-        list.stream().sorted(Comparator.comparingInt(City::population).reversed()).skip(2).findFirst();
-
-        strings.stream().collect(Collectors.joining(" | "));
+        Collections.reverse(numbers);
+        list.stream().sorted(Comparator.comparingInt(City::population).reversed()).skip(1).findFirst();
+        list.stream().collect(Collectors.groupingBy(City::population));
+        strings.stream().collect(Collectors.joining());
+        strings.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         strings.stream().map(String::toUpperCase);
 
         listOfLists.stream().flatMap(Collection::stream).toList();
