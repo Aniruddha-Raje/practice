@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Slf4j
 public class Test {
@@ -35,13 +36,6 @@ public class Test {
         log.info(numbers.toString() + strings + str + listOfLists +  list);
 
 
-        list.stream().sorted(Comparator.comparingInt(City::population).reversed()).skip(1).findFirst();
-        numbers.stream().mapToInt(Integer::intValue).max();
-        numbers.stream().reduce(0, Integer::sum);
-        strings.stream().collect(Collectors.joining());
-        strings.stream().map(String::toUpperCase);
-        numbers.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-
 
 
 
@@ -54,15 +48,19 @@ public class Test {
 
         Arrays.stream(intArr).average();
         Arrays.stream(intArr).max();
+
+        Collections.reverse(numbers);
         numbers.stream().mapToInt(Integer::intValue).average();
         numbers.stream().max(Integer::compareTo);
         numbers.stream().sorted(Comparator.comparingInt(Integer::intValue).reversed()).toList();
         numbers.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         numbers.stream().reduce(0, Integer::sum);
+        IntSummaryStatistics stats = IntStream.of(intArr).summaryStatistics();
 
-        Collections.reverse(numbers);
+
         list.stream().sorted(Comparator.comparingInt(City::population).reversed()).skip(1).findFirst();
         list.stream().collect(Collectors.groupingBy(City::population));
+
         strings.stream().collect(Collectors.joining());
         strings.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         strings.stream().map(String::toUpperCase);
